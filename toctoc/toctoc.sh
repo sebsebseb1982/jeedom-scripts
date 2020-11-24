@@ -12,8 +12,10 @@ curl -u $username:$password --silent "https://mail.google.com/mail/feed/atom/Ala
       if [ "${BASH_REMATCH[1]}" = "A" ]
       then
          echo "Maison fermee"
+         exit 0
       else
          echo "Maison ouverte"
+         exit 1
       fi
    fi
 done
