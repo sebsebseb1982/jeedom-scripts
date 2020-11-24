@@ -10,8 +10,10 @@ curl -u $username:$password --silent "https://mail.google.com/mail/feed/atom/Ala
       if [ "${BASH_REMATCH[1]}" = "A" ]
       then
          echo "0"
+         exit 0
       else
          echo "1"
+         exit 0
       fi
    fi
 done
