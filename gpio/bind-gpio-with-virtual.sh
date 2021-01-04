@@ -3,19 +3,21 @@ GPIO=$1
 virtualId=$2
 gpio mode $GPIO in
 
-previousState=0
+previousState=false
+
+CURRENT_PATH="`dirname \"$0\"`"
 
 while true; do
   if [ 1 == "$(gpio read ${GPIO})" ]; then
     printf "high \r"
-    newState=1
+    newState=true
   else
     printf "low  \r"
-    newState=0
+    newState=false
   fi
 
   if [ "$newState" != "$previousState" ]; then
-    sh ./../virtual/update.sh $virtualId $newState
+    sh $CURRENT_PATH/../virtual/update.sh $virtualId $newState
   fi
 
   previousState=$newState
