@@ -1,19 +1,9 @@
 #!/bin/bash
 
-username=$1
-password=$2
+cd ~/git/domotic3
 
-curl -u $username:$password --silent "https://mail.google.com/mail/feed/atom/Alarme" |  grep -oPm1 "(?<=<title>)[^<]+" | sed '1d' | while read arg1; do
-   REGEX="([a-zA-Z]+)rming.*"
-   if [[ $arg1 =~ $REGEX ]]
-   then
-      if [ "${BASH_REMATCH[1]}" = "A" ]
-      then
-         echo "1"
-         exit 0
-      else
-         echo "0"
-         exit 0
-      fi
-   fi
-done
+if node src/alarm/alarm.js | grep -q 'true'; then
+   echo "1"
+else
+   echo "0"
+fi
