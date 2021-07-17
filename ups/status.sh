@@ -30,9 +30,9 @@ UPS_PATH=$(curl \
 curl \
     --location \
     -s \
-    --request GET "$SYNOLOGY_HOST:$SYNOLOGY_PORT/webapi/$UPS_PATH?api=SYNO.Core.ExternalDevice.UPS&method=get&version=1&_sid=$SID" | jq --arg v "$REQUESTED_VALUE" '.data[$v]'
+    --request GET "$SYNOLOGY_HOST:$SYNOLOGY_PORT/webapi/$UPS_PATH?api=SYNO.Core.ExternalDevice.UPS&method=get&version=1&_sid=$SID" | jq --raw-output --arg v "$REQUESTED_VALUE" '.data[$v]'
 
 curl \
     --location \
     -s \
-    --request GET "$SYNOLOGY_HOST:$SYNOLOGY_PORT/webapi/$AUTH_PATH?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation&_sid=$SID"
+    --request GET "$SYNOLOGY_HOST:$SYNOLOGY_PORT/webapi/$AUTH_PATH?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation&_sid=$SID" > /dev/null
