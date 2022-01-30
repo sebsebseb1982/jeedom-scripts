@@ -1,10 +1,11 @@
 #!/bin/bash
 
-avrHostName=$1
+itemName=$1
+avrHostName=$2
 
 status=$(curl -s "http://${avrHostName}/goform/formMainZone_MainZoneXml.xml")
 
-regex='<MasterVolume><value>(.*)</value></MasterVolume>'
+regex="<$itemName><value>(.*)</value></$itemName>"
 
 [[ $status =~ $regex ]]
 
